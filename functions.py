@@ -1,21 +1,16 @@
-# Stock Data Visualizer
-# This program asks the user to enter the stock symbol for the company they want data for
-# Asks the user for the chart type they would like
-# Asks the user for the time series function they want the api to use
-# Asks the user for the beginning date in YYYY-MM-DD format
-# Asks the user for the end date in YYYY-MM-DD format (The end date should not be before the begin date) 
-# Generates a graph and open in the user’s default browser
-#
-# 10/20/2021
-# Amy Snell, Eric Stranquist, Joel Spencer, Luke Manary, Michael Shamsutdinov, Stephen White
+# List of functions used by main.py
 
+#imports
 from datetime import datetime
+import requests
 
+#define constants
+API_KEY = "NDN2S8ZUZVMFC79X"
 
 #this function collects and tests user data for the queries - stock symbol, chart type, time series, start date and end date
-def GetUserData():
+def get_user_input():
 
-#initializing values
+    #initializing values
     stockSymbol = "" #initializing stock symbol
     chartType = 1 #initializing chart type
     timeSeries = 1 #initializing time series
@@ -27,10 +22,10 @@ def GetUserData():
     while True:
         try: #testing user input
             stockSymbol = input('Enter the Stock Symbol you are looking for: ')
-        except stockSymbol == "": #testing if user input is null
-            print('Stock Symbol Example: GOOGL')
-            continue
-        except Exception: # catching arrors
+            if stockSymbol == "": #testing if user input is null
+                print('Stock Symbol Example: GOOGL')    #input example due to null input
+                raise Exception
+        except Exception: #catching errors
             print('\nInvalid Entry. Please try again...')
             continue
         else:
@@ -84,24 +79,37 @@ def GetUserData():
                                             chartTypeStr = str(chartType) #converting ints to strings for queries
                                             timeSeriesStr = str(timeSeries) #converting ints to strings for queries
 
+                                            return_dict = {
+                                                "stockSymbol": stockSymbol,
+                                                "chartTypeStr": chartTypeStr,
+                                                "timeSeriesStr": timeSeriesStr,
+                                                "startDateStr": startDateStr,
+                                                "endDateStr": endDateStr
+                                            }
+
                                             #printing values and types for debugging purposes - will take out later
-                                            print ('Stock Symbol: ', stockSymbol, 'Chart Type: ',chartTypeStr,'Time Series: ',timeSeriesStr,'Start Date: ',startDateStr,'End Date: ',endDateStr)
+                                            #moved to main() function
+                                            # print ('Stock Symbol: ', stockSymbol, 'Chart Type: ',chartTypeStr,'Time Series: ',timeSeriesStr,'Start Date: ',startDateStr,'End Date: ',endDateStr)
 
-                                            symbol_type = type(stockSymbol)
-                                            chart_type = type(chartTypeStr)
-                                            timeSeries_type = type(timeSeriesStr)
-                                            startDate_type = type(startDateStr)
-                                            endDate_type = type(endDateStr)
+                                            #unsure of purpose for data type variables
+                                            # symbol_type = type(stockSymbol)
+                                            # chart_type = type(chartTypeStr)
+                                            # timeSeries_type = type(timeSeriesStr)
+                                            # startDate_type = type(startDateStr)
+                                            # endDate_type = type(endDateStr)
 
-                                            print(symbol_type,chart_type,timeSeries_type,startDate_type,endDate_type)
+                                            # print(symbol_type,chart_type,timeSeries_type,startDate_type,endDate_type)
 
                                             #returning string values to send for queries
-                                            return stockSymbol, chartTypeStr, timeSeriesStr, startDateStr, endDateStr
+                                            return return_dict
+
+# calls the api given inputs
+def call_api():
+    #create url string
 
 
-def main():
-    print('Stock Data Visualizer\n-----------------------')
-    GetUserData()
+    #make api call
 
 
-main()
+    #return json
+    return API_KEY
