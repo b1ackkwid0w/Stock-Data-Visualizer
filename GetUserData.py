@@ -26,11 +26,11 @@ def GetUserData():
 
     while True:
         try: #testing user input
-            stockSymbol = input('Enter the Stock Symbol you are looking for: ')
+            stockSymbol = input('Enter the Stock Symbol you are looking for: ').upper()
         except stockSymbol == "": #testing if user input is null
             print('Stock Symbol Example: GOOGL')
             continue
-        except Exception: # catching arrors
+        except Exception: # catching errors
             print('\nInvalid Entry. Please try again...')
             continue
         else:
