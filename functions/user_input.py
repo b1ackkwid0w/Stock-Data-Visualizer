@@ -15,7 +15,7 @@ def get_user_input():
     while True:
         try: #testing user input
             stock_symbol = input('Enter the Stock Symbol you are looking for: ')
-            stock_symbol = stock_symbol.upper
+            stock_symbol = stock_symbol.upper()
             if stock_symbol == "": #testing if user input is null
                 print('Stock Symbol Example: GOOGL')    #input example due to null input
                 raise Exception
