@@ -7,17 +7,23 @@
 # 10/20/2021
 # Amy Snell, Eric Stranquist, Joel Spencer, Luke Manary, Michael Shamsutdinov, Stephen White
 
-from functions import *
+from functions.user_input import *
+from functions.call_api import *
+from functions.render_graph import *
+
+API_KEY = "NDN2S8ZUZVMFC79X"
 
 def main():
-    print('Stock Data Visualizer\n-----------------------')
-    #call the functions
-    user_data = get_user_input()
-    print('userData = ', user_data)
+  print('Stock Data Visualizer\n-----------------------')
 
-    api_data = call_api()
-    print('apiData (currently just api_key)= ', api_data)
+  #get user input
+  inputs = get_user_input()
+  print('inputs = ', inputs)
 
+  #make api call
+  api_data = call_api(inputs, API_KEY)
+  print('api_data = ', api_data)
 
+  #render graph in browser
 
 main()
