@@ -1,12 +1,31 @@
 #imports
 from datetime import datetime
+from enum import Enum
+
+GRAPH = {
+    '1': 'bar',
+    '2': 'line'
+}
+FUNCTION = {
+    '1': 'intraday',
+    '2': 'daily',
+    '3': 'weekly',
+    '4': 'monthly'
+}
+INTERVAL = {
+    '1': '1min',
+    '2': '5min',
+    '3': '15min',
+    '4': '30min',
+    '5': '60min'
+}
 
 #this function collects and tests user data for the queries - stock symbol, chart type, time series, start date and end date
 def get_user_input():
     #initializing values
     stock_symbol = "" #initializing stock symbol
-    chart_type = 1 #initializing chart type
-    time_series = 1 #initializing time series
+    chart_type = "1" #initializing chart type
+    time_series = "1" #initializing time series
     start_day = "1900-01-01" #initiazing start date at Jan 1 1900
     end_date_obj = datetime.today() #initiazing end date obj as today
     end_date = end_date_obj.date() #removing time from end date object
@@ -45,7 +64,7 @@ def get_user_input():
                         else:
                             while True:
                                 try: #testing user input
-                                    print('\nGraph Time Interval\n-------------------\n1. 1min\n2. 5min\n3. 15min\n4. 30min\n5. 60min\n')
+                                    print('\nTime Interval\n-------------------\n1. 1min\n2. 5min\n3. 15min\n4. 30min\n5. 60min\n')
                                     time_interval = int(input("Enter time interval option (1, 2, 3, 4, 5): "))
                                     if time_interval < 1 or time_interval > 5:
                                         raise Exception
@@ -76,9 +95,9 @@ def get_user_input():
                                                     end_date = end_date_obj.date() #removing time from date object
                                                     start_date_str = datetime.strftime(start_date, "%Y-%m-%d") #converting date objects to strings for queries
                                                     end_date_str = datetime.strftime(end_date, "%Y-%m-%d") #converting date objects to strings for queries
-                                                    graph_type_str = str(graph_type) #converting ints to strings for queries
-                                                    time_series_str = str(time_series) #converting ints to strings for queries
-                                                    time_interval_str = str(time_interval) # Convert ints to strings for queries
+                                                    graph_type_str = GRAPH[str(graph_type)] #converting ints to strings for queries
+                                                    time_series_str = FUNCTION[str(time_series)] #converting ints to strings for queries
+                                                    time_interval_str = INTERVAL[str(time_interval)] # Convert ints to strings for queries
 
                                                     return_dict = {
                                                         "stock_symbol": stock_symbol,
