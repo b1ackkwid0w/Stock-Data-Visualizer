@@ -7,10 +7,10 @@ GRAPH = {
     '2': 'line'
 }
 FUNCTION = {
-    '1': 'intraday',
-    '2': 'daily',
-    '3': 'weekly',
-    '4': 'monthly'
+    '1': 'TIME_SERIES_INTRADAY',
+    '2': 'TIME_SERIES_DAILY',
+    '3': 'TIME_SERIES_WEEKLY',
+    '4': 'TIME_SERIES_MONTHLY'
 }
 INTERVAL = {
     '1': '1min',

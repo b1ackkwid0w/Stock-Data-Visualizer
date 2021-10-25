@@ -6,17 +6,33 @@ def call_api(inputs, API_KEY):
   #   "stock_symbol": string,
   #   "chart_type": string,
   #   "time_series": string,
+  #   "time_interval": string,
   #   "start_date": string,
   #   "end_date": string
   # }
-  # Note:
-  #   - If empty, bug happened in "user_input.py"
-  #   - strings are not encoded
+  # Required fields based on 'function': (//optional: only including relevant fields)
+  #   TIME_SERIES_INTRADAY --> function, symbol, interval, apikey   //optional: outputsize
+  #   TIME_SERIES_DAILY --> function, symbol, apikey                //optional: outputsize
+  #   TIME_SERIES_WEEKLY --> function, symbol, apikey               //optional: n/a
+  #   TIME_SERIES_MONTHLY --> function, symbol, apikey              //optional: n/a
 
+  # create url string
+  url = 'https://www.alphavantage.co/query?function=' + inputs['time_series'] + '&symbol=' + inputs['stock_symbol']
 
+  # if time_series is 'TIME_SERIES_INTRADAY' then add the required 'interval' field to the url string
+  if inputs['time_series'] == 'TIME_SERIES_INTRADAY':
+    url = url + '&interval=' + inputs['time_interval']
 
+  # add API_KEY to url string
+  url = url + '&apikey=' + API_KEY
 
+  # make request using url string
+  r = requests.get(url)
 
-  #return json (from the api) 
-  #or return a dictionary if you want to convert it. Will probably make things easier in "render_graph.py"
-  return inputs #placeholder
+  # parse response from json to dictionary
+  data = r.json()
+
+  # check json status
+  print(r.status_code)
+
+  return data
