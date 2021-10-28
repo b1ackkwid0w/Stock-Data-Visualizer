@@ -33,6 +33,10 @@ def call_api(inputs, API_KEY):
   data = r.json()
 
   # check json status
-  print(r.status_code)
-
-  return data
+  # print(r.status_code)
+  if r.status_code == 200:
+    print('api call success! ', r.status_code)
+    return data
+  else:
+    print('Error: ', r.status_code)
+    return {}
