@@ -11,8 +11,7 @@ from functions.user_input import get_user_input
 from functions.call_api import call_api
 from functions.filter_dates import filter_dates
 from functions.render_graph import render_graph
-
-API_KEY = "NDN2S8ZUZVMFC79X"
+from api_key import API_KEY
 
 def main():
   print('Stock Data Visualizer\n-----------------------')
@@ -27,9 +26,13 @@ def main():
 
   #filter out unwanted dates
   filtered_api_data = filter_dates(api_data, inputs)
-  print('\nfiltered_api_data = \n', filtered_api_data)
+  # print('\nfiltered_api_data = \n', filtered_api_data)
 
-  #render graph in browser
-  render_graph(filtered_api_data)
+  if not filtered_api_data:
+    #render graph in browser
+    render_graph(filtered_api_data)
+  else:
+    # render_default()
+    pass
 
 main()
