@@ -28,10 +28,13 @@ def main():
   filtered_api_data = filter_dates(api_data, inputs)
   # print('\nfiltered_api_data = \n', filtered_api_data)
 
-  if not filtered_api_data:
+  if filtered_api_data:
     #render graph in browser
-    render_graph(filtered_api_data)
+    # print("FILTERED DATA FROM INSIDE IF", filtered_api_data)
+    # print("test")
+    render_graph(filtered_api_data, inputs)
   else:
+    print("else")
     # render_default()
     pass
 
