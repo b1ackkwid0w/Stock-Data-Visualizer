@@ -22,6 +22,9 @@ def call_api(inputs, API_KEY):
   # if time_series is 'TIME_SERIES_INTRADAY' then add the required 'interval' field to the url string
   if inputs['time_series'] == 'TIME_SERIES_INTRADAY':
     url = url + '&interval=' + inputs['time_interval']
+    url = url + '&outputsize=full'  # request more than the last 100 data points
+  elif inputs['time_series'] == 'TIME_SERIES_DAILY':
+    url = url + '&outputsize=full'  # request more than the last 100 data points
 
   # add API_KEY to url string
   url = url + '&apikey=' + API_KEY
