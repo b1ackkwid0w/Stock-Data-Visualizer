@@ -14,8 +14,6 @@ from functions.render_graph import render_graph
 from api_key import API_KEY
 
 def main():
-  print('Stock Data Visualizer\n-----------------------')
-
   #get user input
   inputs = get_user_input()
   # print('\ninputs = \n', inputs)
