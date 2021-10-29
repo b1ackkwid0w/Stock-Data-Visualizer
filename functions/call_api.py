@@ -30,7 +30,11 @@ def call_api(inputs, API_KEY):
   url = url + '&apikey=' + API_KEY
 
   # make request using url string
-  r = requests.get(url)
+  try:
+    r = requests.get(url)
+  except Exception:
+    print('An error occurred during api call. Exiting program...')
+    exit(1)
 
   # parse response from json to dictionary
   data = r.json()
