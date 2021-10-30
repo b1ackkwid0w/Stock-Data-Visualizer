@@ -7,33 +7,43 @@
 # 10/20/2021
 # Amy Snell, Eric Stranquist, Joel Spencer, Luke Manary, Michael Shamsutdinov, Stephen White
 
-from functions.user_input import get_user_input
-from functions.call_api import call_api
-from functions.filter_dates import filter_dates
-from functions.render_graph import render_graph
+from user_input import get_user_input
+from call_api import call_api
+from filter_dates import filter_dates
+from render_graph import render_graph
 from api_key import API_KEY
 
 def main():
-  #get user input
-  inputs = get_user_input()
-  # print('\ninputs = \n', inputs)
 
-  #make api call
-  api_data = call_api(inputs, API_KEY)
-  # print('\napi_data = \n', api_data)
+  do_again = True
+  while do_again:
+    #get user input
+    inputs = get_user_input()
+    # print('\ninputs = \n', inputs)
 
-  #filter out unwanted dates
-  filtered_api_data = filter_dates(api_data, inputs)
-  # print('\nfiltered_api_data = \n', filtered_api_data)
+    #make api call
+    api_data = call_api(inputs, API_KEY)
+    # print('\napi_data = \n', api_data)
 
-  if filtered_api_data:
-    #render graph in browser
-    # print("FILTERED DATA FROM INSIDE IF", filtered_api_data)
-    # print("test")
-    render_graph(filtered_api_data, inputs)
-  else:
-    print("else")
-    # render_default()
-    pass
+    #filter out unwanted dates
+    filtered_api_data = filter_dates(api_data, inputs)
+    # print('\nfiltered_api_data = \n', filtered_api_data)
+
+    if filtered_api_data:
+      #render graph in browser
+      # print("FILTERED DATA FROM INSIDE IF", filtered_api_data)
+      # print("test")
+      render_graph(filtered_api_data, inputs)
+    else:
+      print("An unexpected error occurred...")
+      # render_default()
+      pass
+    go_again = input('Would you like to see more stock data? (Y/N): ')
+    go_again = go_again.upper()
+    if (go_again == 'Y'):
+      do_again = True
+    else:
+      do_again = False
+      
 
 main()
